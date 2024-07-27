@@ -2,33 +2,32 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <title>Register</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Greetings Page</title>
     <link rel="stylesheet" href="../assets/css/stylesheet.css">
 
 </head>
 <body>
 <div id="subtopics">
-    <h1>Login Page</h1>
+    <h1>Register Page</h1>
 
     <div id="login_info">
         <label for="username"><b>Username</b></label>
         <input type="text" placeholder="Enter Username" name="username" required>
+
+        <label for="email"><b>Email</b></label>
+        <input type="text" placeholder="Enter email" name="email" required>
 
         <label for="psw"><b>Password</b></label>
         <input type="password" placeholder="Enter Password" name="psw" required>
     </div>
 
     <div class="buttons">
-        <div id="upper-buttons">
-            <button id="login">Login</button>
-        </div>
         <div class="lower-buttons">
-            <button type="button" th:onclick="|window.location.href='/register'|" id="new">Create a new account</button>
+            <button onclick="location.href='add.htm'" id="new">Create a new account</button>
         </div>
     </div>
 </div>
 
 </body>
 </html>
-
