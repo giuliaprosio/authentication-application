@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="../assets/css/stylesheet.css">
 
 </head>
@@ -12,21 +12,15 @@
     <h1>Register Page</h1>
 
     <div id="login_info">
-        <label for="username"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="username" required>
+        <form action="#" th:action="@{/register}" th:object="${user}" method="post">
+            <p>Username: <input type="text" th:field="*{name}"></p>
+            <p>Email: <input type="text" th:field="*{email}"></p>
+            <p>Password: <input type="text" th:field="*{password}"></p>
+            <p><input id="submissionButton" type="submit" value="Submit"></p>
 
-        <label for="email"><b>Email</b></label>
-        <input type="text" placeholder="Enter email" name="email" required>
-
-        <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" required>
+        </form>
     </div>
-
-    <div class="buttons">
-        <div class="lower-buttons">
-            <button onclick="location.href='returnPage'" id="new">Create a new account</button>
-        </div>
-    </div>
+    
 </div>
 
 </body>

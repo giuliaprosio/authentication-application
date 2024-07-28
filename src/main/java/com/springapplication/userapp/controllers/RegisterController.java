@@ -4,6 +4,7 @@ import com.springapplication.userapp.User;
 import com.springapplication.userapp.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -17,22 +18,20 @@ public class RegisterController {
 
 
     @GetMapping("/register")
-    public String register() throws  Exception {
+    public String register(Model model) throws  Exception {
+        model.addAttribute("user", new User());
         return "register";
     }
 
     /** TODO: Handle POST requests to add new users **/
     @PostMapping("/register")
-    public String processRegistration(@ModelAttribute("userForm") User user, Map<String, Object> model) {
-        User u = new User();
-        u.setName(user.getName());
-        u.setEmail(user.getEmail());
-        user.setPassword(user.getPassword());
+    public String submission(@ModelAttribute User user, Model model) {
 
-        userRepository.save(user);
-        System.out.println(user.getEmail());
+        model.addAttribute("user", user);
 
-        return "RegistrationSuccess";
+        System.out.println(user.getName());
+
+        return "added";
     }
 
 

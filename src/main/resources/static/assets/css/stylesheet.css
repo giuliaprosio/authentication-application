@@ -51,11 +51,13 @@ h1 {
     align-items: center;
     margin-top: -90px;
     padding: 10px 20px;
-    line-height: 30px;
+    line-height: 25px;
     background-color: #d3d3d3;
     border-style: solid;
     border-color: #28a745;
     border-radius: 4px;
+    width: 200px;
+    height: 200px;
 }
 
 button {
@@ -110,4 +112,16 @@ button {
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+}
+
+#submissionButton {
+    width: 100%;
+    max-width: 160px;
+    background-color: #ffc107;
+    color: black;
+    border-radius: 4px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    height: 100%;
+    max-height: 40px;
 }
