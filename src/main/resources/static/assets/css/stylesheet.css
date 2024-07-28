@@ -96,3 +96,18 @@ button {
 #new:hover {
     background-color: #e0a800;
 }
+
+#success {
+    background-color: dodgerblue;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 10px 20px;
+    margin: 15px;
+    width: 400px;
+    height: 120px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
