@@ -29,7 +29,7 @@ public class RegisterController {
 
         model.addAttribute("user", user);
 
-        System.out.println(user.getName());
+        userRepository.save(user);
 
         return "added";
     }
