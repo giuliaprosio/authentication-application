@@ -45,7 +45,22 @@ h1 {
     max-width: 400px;
 }
 
-#login_info{
+
+#login_info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -90px;
+    padding: 10px 20px;
+    line-height: 65px;
+    background-color: #d3d3d3;
+    border-style: solid;
+    border-color: #28a745;
+    border-radius: 4px;
+    width: 200px;
+    height: 200px;
+}
+#submissionForm {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -115,13 +130,25 @@ button {
 }
 
 #submissionButton {
+    justify-content: space-between;
     width: 100%;
-    max-width: 160px;
-    background-color: #ffc107;
-    color: black;
-    border-radius: 4px;
-    font-family: Arial, Helvetica, sans-serif;
+    max-width: 400px;
+    margin-bottom: 170px;
     font-weight: bold;
-    height: 100%;
-    max-height: 40px;
+    font-size: 16px;
+    padding: 10px 20px;
+    background-color: #ffc107;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 30px;
+}
+
+#name {
+    font-size: x-large;
+}
+
+#psw {
+    font-size: x-large;
 }
