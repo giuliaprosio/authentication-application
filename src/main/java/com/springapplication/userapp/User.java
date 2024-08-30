@@ -22,6 +22,8 @@ public class User {
 
     private String password;
 
+    private String secondPassword;
+
     public Integer getId() {
         return id;
     }
@@ -53,6 +55,16 @@ public class User {
     public String getPassword() {
         return password;
     }
+
+    public String getSecondPassword() {
+        return secondPassword;
+    }
+
+    public void setSecondPassword(String secondPassword) {
+        this.secondPassword = secondPassword;
+    }
+
+
 
 
 }

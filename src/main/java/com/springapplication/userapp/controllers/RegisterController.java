@@ -30,7 +30,7 @@ public class RegisterController {
     public String login() throws Exception {
         return "login";
     }
-
+    
     @GetMapping("/register")
     public String register(Model model) throws  Exception {
         model.addAttribute("user", new User());
