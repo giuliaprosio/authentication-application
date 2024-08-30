@@ -46,8 +46,12 @@ public class RegisterController {
     @PostMapping("/register")
     public String submission(@ModelAttribute User user, Model model) {
 
-        if(!user.getPassword().equals("")){
+        if(!user.getPassword().equals("") && !user.getSecondPassword().equals("")){
+            if(!user.getPassword().equals(user.getSecondPassword())) {
+                return "redirect:register"; 
+            }
             user.setPassword(passwordEncoder.encode(user.getPassword()));
+
         }
         model.addAttribute("user", user);
 
