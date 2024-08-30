@@ -25,12 +25,16 @@ public class RegisterController {
         this.passwordEncoder = passwordEncoder;
     }
 
+    @GetMapping("/")
+    public String index() {
+        return "login";
+    }
 
     @GetMapping("/login")
     public String login() throws Exception {
         return "login";
     }
-    
+
     @GetMapping("/register")
     public String register(Model model) throws  Exception {
         model.addAttribute("user", new User());
