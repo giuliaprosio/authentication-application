@@ -26,13 +26,22 @@ public class RegisterController {
     }
 
     @GetMapping("/")
-    public String index() {
+    public String index(Model model) {
+        model.addAttribute("user", new User());
         return "login";
     }
 
     @GetMapping("/login")
-    public String login() throws Exception {
+    public String login(Model model) throws Exception {
+        model.addAttribute("user", new User());
         return "login";
+    }
+
+    @PostMapping("/login")
+    public String successfulLogin(@ModelAttribute User user, Model model) throws Exception {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        return "home";
     }
 
     @GetMapping("/register")
@@ -41,14 +50,12 @@ public class RegisterController {
         return "register";
     }
 
-    /** TODO: Handle POST requests to add new users **/
-
     @PostMapping("/register")
     public String submission(@ModelAttribute User user, Model model) {
 
         if(!user.getPassword().equals("") && !user.getSecondPassword().equals("")){
             if(!user.getPassword().equals(user.getSecondPassword())) {
-                return "redirect:register"; 
+                return "redirect:register";
             }
             user.setPassword(passwordEncoder.encode(user.getPassword()));
 

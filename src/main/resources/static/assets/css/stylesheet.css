@@ -33,6 +33,7 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 90px;
 }
 
 #button {
@@ -166,4 +167,10 @@ button {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#loginForm {
+    width: 200px;
+    height:200px;
+    line-height: 35px;
 }

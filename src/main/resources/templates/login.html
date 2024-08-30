@@ -12,16 +12,17 @@
     <h1>Login Page</h1>
 
     <div id="login_info">
-        <label id="username" for="username"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="username" required>
+        <form id="loginForm" action="#" th:action="@{/login}" th:object="${user}" method="post">
+            <p>Username: <input id="username" type="text" placeholder="Enter Username" th:field="*{username}"></p>
+            <p>Password: <input id="password" type="password" placeholder="Enter Password" th:field="*{password}"></p>
+            <p><input id="submissionButton" type="submit" value="Submit"></p>
 
-        <label id="password" for="password"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="password" required>
-    </div>
+        </form>
+     </div>
 
     <div class="buttons">
         <div id="upper-buttons">
-            <button id="login">Login</button>
+            <!--<button id="login">Login</button>-->
         </div>
         <div class="lower-buttons">
             <button type="button" th:onclick="|window.location.href='/register'|" id="new">Create a new account</button>
