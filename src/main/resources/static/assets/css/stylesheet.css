@@ -152,3 +152,18 @@ button {
 #psw {
     font-size: x-large;
 }
+
+#register-subtopics {
+    display: flex;
+    flex-direction: column;
+    justify-content: right;
+    align-items: center;
+    width: 90%;
+    max-width: 600px;
+    height: 90%;
+    max-height: 600px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
