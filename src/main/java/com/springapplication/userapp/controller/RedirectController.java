@@ -1,6 +1,6 @@
-package com.springapplication.userapp.controllers;
+package com.springapplication.userapp.controller;
 
-import com.springapplication.userapp.User;
+import com.springapplication.userapp.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

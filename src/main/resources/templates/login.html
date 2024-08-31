@@ -13,9 +13,10 @@
 
     <div id="login_info">
         <form id="loginForm" action="#" th:action="@{/login}" th:object="${user}" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
             <p>Username: <input id="username" type="text" placeholder="Enter Username" th:field="*{username}"></p>
             <p>Password: <input id="password" type="password" placeholder="Enter Password" th:field="*{password}"></p>
-            <p><input id="submissionButton" type="submit" value="Submit"></p>
+            <p><input id="loginSubmissionButton" type="submit" value="Submit"></p>
 
         </form>
      </div>

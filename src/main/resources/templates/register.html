@@ -13,10 +13,10 @@
 
     <div id="submissionForm">
         <form action="#" th:action="@{/register}" th:object="${user}" method="post">
-            <p>Username: <input type="text" th:field="*{username}"></p>
-            <p>Email: <input type="text" th:field="*{email}"></p>
-            <p>Password: <input id="firstPassword" type="password" th:field="*{password}"></p>
-            <p>Repeat Password: <input id="secondPassword" type="password" th:field="*{secondPassword}"></p>
+            <p>Username: <input type="text" placeholder="Enter Username" th:field="*{username}"></p>
+            <p>Email: <input type="text" placeholder="Enter Email" th:field="*{email}"></p>
+            <p>Password: <input id="firstPassword" type="password" placeholder="Enter Password" th:field="*{password}"></p>
+            <p>Repeat Password: <input id="secondPassword" type="password" placeholder="Enter Password" th:field="*{secondPassword}"></p>
             <p><input id="submissionButton" type="submit" value="Submit"></p>
 
         </form>

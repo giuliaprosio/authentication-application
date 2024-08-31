@@ -1,17 +1,12 @@
-package com.springapplication.userapp.controllers;
+package com.springapplication.userapp.controller;
 
-import antlr.StringUtils;
-import com.springapplication.userapp.User;
-import com.springapplication.userapp.UserRepository;
+import com.springapplication.userapp.model.User;
+import com.springapplication.userapp.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
 
 
 @Controller
@@ -37,7 +32,7 @@ public class RegisterController {
         return "login";
     }
 
-    @PostMapping("/login")
+    /**
     public String successfulLogin(@ModelAttribute User user, Model model) throws Exception {
         System.out.println("LOGIN BUTTON PUSHED!");
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -51,7 +46,7 @@ public class RegisterController {
         System.out.println(user.getUsername());
 
         return "home";
-    }
+    }**/
 
     @GetMapping("/register")
     public String register(Model model) throws  Exception {
