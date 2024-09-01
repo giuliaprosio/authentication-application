@@ -14,10 +14,12 @@ public class RegisterController {
 
     @Autowired
     private UserRepository userRepository;
-
     private final PasswordEncoder passwordEncoder;
-    public RegisterController (PasswordEncoder passwordEncoder) {
+
+    public RegisterController (UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
+        this.userRepository = userRepository;
+
     }
 
     @GetMapping("/")
@@ -70,6 +72,11 @@ public class RegisterController {
         userRepository.save(user);
 
         return "added";
+    }
+
+    @GetMapping("/home")
+    public String home() {
+        return "home";
     }
 
 

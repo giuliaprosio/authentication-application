@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
+@Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
@@ -18,7 +18,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         // Fetch user from repository
-       User user = userRepository
+        User user = userRepository.findByUsername(username);
+        if(user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+        return new CustomUserDetails(user);
+
+       /*User user = userRepository
                .findByUsername(username)
                .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
 
@@ -26,6 +32,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return org.springframework.security.core.userdetails.User
                 .withUsername(user.getUsername())
                 .password(user.getPassword())
-                .build();
+                .build();*/
     }
 }
