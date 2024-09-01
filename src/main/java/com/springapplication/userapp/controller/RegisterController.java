@@ -34,21 +34,6 @@ public class RegisterController {
         return "login";
     }
 
-    /**
-    public String successfulLogin(@ModelAttribute User user, Model model) throws Exception {
-        System.out.println("LOGIN BUTTON PUSHED!");
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        System.out.println(user.getUsername());
-        if(!userRepository.findExistingUser(user.getUsername(), user.getPassword())){
-            System.out.println("Error");
-            return "redirect:login";
-        }
-
-        model.addAttribute("user", user);
-        System.out.println(user.getUsername());
-
-        return "home";
-    }**/
 
     @GetMapping("/register")
     public String register(Model model) throws  Exception {
@@ -74,10 +59,7 @@ public class RegisterController {
         return "added";
     }
 
-    @GetMapping("/home")
-    public String home() {
-        return "home";
-    }
+
 
 
 }

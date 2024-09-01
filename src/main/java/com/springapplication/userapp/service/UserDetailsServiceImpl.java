@@ -22,16 +22,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if(user == null) {
             throw new UsernameNotFoundException("User not found");
         }
+
         return new CustomUserDetails(user);
-
-       /*User user = userRepository
-               .findByUsername(username)
-               .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
-
-        // Convert User object to a UserDetails object to be used by Spring Security
-        return org.springframework.security.core.userdetails.User
-                .withUsername(user.getUsername())
-                .password(user.getPassword())
-                .build();*/
     }
 }
