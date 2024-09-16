@@ -11,6 +11,11 @@
 <div id="register-subtopics">
     <h1>Register Page</h1>
 
+    <!-- Display error message if available -->
+    <div id="errorMessage" th:if="${errorMessage}" style="color: red">
+        <p th:text="${errorMessage}"></p>
+    </div>
+
     <div id="submissionForm">
         <form action="#" th:action="@{/register}" th:object="${user}" method="post">
             <p>Username: <input type="text" placeholder="Enter Username" th:field="*{username}"></p>

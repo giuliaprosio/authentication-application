@@ -1,9 +1,9 @@
 package com.springapplication.userapp.controller;
 
+import com.springapplication.userapp.model.Result;
 import com.springapplication.userapp.model.User;
-import com.springapplication.userapp.repo.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import com.springapplication.userapp.model.UserError;
+import com.springapplication.userapp.service.UserDetailsServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,14 +12,20 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class RegisterController {
 
-    @Autowired
+    /*@Autowired
     private UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+    //private final PasswordEncoder passwordEncoder;
 
     public RegisterController (UserRepository userRepository, PasswordEncoder passwordEncoder) {
-        this.passwordEncoder = passwordEncoder;
+        //this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
 
+    }*/
+
+    private final UserDetailsServiceImpl userDetailsService;
+
+    public RegisterController(UserDetailsServiceImpl userDetailsService) {
+        this.userDetailsService = userDetailsService;
     }
 
     @GetMapping("/")
@@ -43,6 +49,27 @@ public class RegisterController {
 
     @PostMapping("/register")
     public String submission(@ModelAttribute User user, Model model) {
+        Result<User, UserError> result = userDetailsService.registerUser(user);
+
+        return result.fold(
+                userSuccess -> {
+                    model.addAttribute("user", userSuccess);
+                    return "added";
+                },
+                userError -> {
+                    if(userError instanceof UserError.DuplicatedUsername) {
+                        model.addAttribute("errorMessage", "Username is already taken.");
+                    }else if(userError instanceof UserError.NoUsername) {
+                        model.addAttribute("errorMessage", "Username cannot be empty");
+                    }
+                    model.addAttribute("user", user);
+                    return "register";
+                }
+        );
+    }
+
+    /*@PostMapping("/register")
+    public String submission(@ModelAttribute User user, Model model) {
 
         if(!user.getPassword().equals("") && !user.getSecondPassword().equals("")){
             if(!user.getPassword().equals(user.getSecondPassword())) {
@@ -57,7 +84,7 @@ public class RegisterController {
         userRepository.save(user);
 
         return "added";
-    }
+    }*/
 
 
 
