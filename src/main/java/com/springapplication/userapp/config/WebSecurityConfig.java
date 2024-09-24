@@ -15,11 +15,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class WebSecurityConfig {
 
-    //@Bean
-    /*UserDetailsService userDetailsService() {
-        return new UserDetailsServiceImpl();
-    }*/
-
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
