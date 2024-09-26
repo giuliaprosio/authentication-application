@@ -1,7 +1,6 @@
 package com.springapplication.userapp.service;
 
 import com.springapplication.userapp.func.Either;
-import com.springapplication.userapp.model.Result;
 import com.springapplication.userapp.model.User;
 import com.springapplication.userapp.model.UserError;
 import com.springapplication.userapp.repo.UserRepository;
