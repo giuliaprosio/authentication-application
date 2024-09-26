@@ -1,5 +1,6 @@
 package com.springapplication.userapp.controller;
 
+import com.springapplication.userapp.error.ApiErrorResponse;
 import com.springapplication.userapp.func.Either;
 import com.springapplication.userapp.model.User;
 import com.springapplication.userapp.model.UserError;
@@ -41,13 +42,10 @@ public class RegisterController {
     public String submission(@ModelAttribute User user, Model model) {
         Either<UserError, User> result = userDetailsService.registerUser(user);
 
-        return result.fold(
+        return result
+                .mapLeft( e -> model.addAttribute("errorMessage", e.toString()))
+                .fold(
                 userError -> {
-                    if(userError instanceof UserError.DuplicatedUsername) {
-                        model.addAttribute("errorMessage", "Username is already taken.");
-                    }else if(userError instanceof UserError.NoUsername) {
-                        model.addAttribute("errorMessage", "Username cannot be empty");
-                    }
                     model.addAttribute("user", user);
                     return "register";
                 },
