@@ -42,7 +42,16 @@ public class RegisterController {
     public String submission(@ModelAttribute User user, Model model) {
         Either<UserError, User> result = userDetailsService.registerUser(user);
 
-        return result
+        if(result.isLeft()) {
+            model.addAttribute("errorMessage", result.left().toString());
+            model.addAttribute("user", user);
+            return "register";
+        }
+
+        model.addAttribute("user", result.right());
+        return "added";
+
+        /*return result
                 .mapLeft( e -> model.addAttribute("errorMessage", e.toString()))
                 .fold(
                 userError -> {
@@ -53,7 +62,7 @@ public class RegisterController {
                     model.addAttribute("user", userSuccess);
                     return "added";
                 }
-        );
+        );*/
     }
 
 }

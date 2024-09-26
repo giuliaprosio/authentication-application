@@ -1,10 +1,15 @@
 package com.springapplication.userapp.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.springapplication.userapp.config.WebSecurityConfig;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users_table")
 public class User {
 
     @Id
@@ -12,13 +17,16 @@ public class User {
     private Long id;
 
     @Column(nullable = false, unique = true)
+    @NotNull
     private String username;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
+    @NotNull
     private String email;
 
     @Column(nullable = false)
     @JsonIgnore
+    @NotNull
     private String password;
 
     @Transient
@@ -67,3 +75,4 @@ public class User {
     }
 
 }
+
