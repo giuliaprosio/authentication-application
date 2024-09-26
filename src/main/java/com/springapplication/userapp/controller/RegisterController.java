@@ -50,19 +50,6 @@ public class RegisterController {
 
         model.addAttribute("user", result.right());
         return "added";
-
-        /*return result
-                .mapLeft( e -> model.addAttribute("errorMessage", e.toString()))
-                .fold(
-                userError -> {
-                    model.addAttribute("user", user);
-                    return "register";
-                },
-                userSuccess -> {
-                    model.addAttribute("user", userSuccess);
-                    return "added";
-                }
-        );*/
     }
 
 }
