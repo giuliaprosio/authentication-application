@@ -1,5 +1,6 @@
 package com.springapplication.userapp.controller;
 
+import com.springapplication.userapp.func.Either;
 import com.springapplication.userapp.model.Result;
 import com.springapplication.userapp.model.User;
 import com.springapplication.userapp.model.UserError;
@@ -39,13 +40,9 @@ public class RegisterController {
 
     @PostMapping("/register")
     public String submission(@ModelAttribute User user, Model model) {
-        Result<User, UserError> result = userDetailsService.registerUser(user);
+        Either<UserError, User> result = userDetailsService.registerUser(user);
 
         return result.fold(
-                userSuccess -> {
-                    model.addAttribute("user", userSuccess);
-                    return "added";
-                },
                 userError -> {
                     if(userError instanceof UserError.DuplicatedUsername) {
                         model.addAttribute("errorMessage", "Username is already taken.");
@@ -54,6 +51,10 @@ public class RegisterController {
                     }
                     model.addAttribute("user", user);
                     return "register";
+                },
+                userSuccess -> {
+                    model.addAttribute("user", userSuccess);
+                    return "added";
                 }
         );
     }

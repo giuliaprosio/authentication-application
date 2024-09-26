@@ -1,5 +1,6 @@
 package com.springapplication.userapp.service;
 
+import com.springapplication.userapp.func.Either;
 import com.springapplication.userapp.model.Result;
 import com.springapplication.userapp.model.User;
 import com.springapplication.userapp.model.UserError;
@@ -16,18 +17,18 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
-    public Result<User, UserError> registerUser(User user) {
+    public Either<UserError, User> registerUser(User user) {
         if (user.getUsername() == null || user.getUsername().isEmpty()) {
-            return Result.failure(new UserError.NoUsername());
+            return Either.left(new UserError.NoUsername());
         }
 
         if (userRepository.findByUsername(user.getUsername()) != null) {
-            return Result.failure(new UserError.DuplicatedUsername());
+            return Either.left(new UserError.DuplicatedUsername());
         }
 
         userRepository.save(user);
 
-        return Result.success(user);
+        return Either.right(user);
     }
 
     @Override
