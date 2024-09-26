@@ -1,6 +1,5 @@
 package com.springapplication.userapp.controller;
 
-import com.springapplication.userapp.error.ApiErrorResponse;
 import com.springapplication.userapp.func.Either;
 import com.springapplication.userapp.model.User;
 import com.springapplication.userapp.model.UserError;

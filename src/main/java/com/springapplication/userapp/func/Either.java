@@ -4,6 +4,13 @@ package com.springapplication.userapp.func;
 import java.util.NoSuchElementException;
 import java.util.function.Function;
 
+/**
+ * A sealed interface to allow to implement ADT Either type, a data type
+ * composed of two disjoint values, a Left one and a Right one.
+ * @param <L> error object
+ * @param <R> success object
+ */
+
 public sealed interface Either<L, R> permits Either.Left, Either.Right {
 
     boolean isLeft();
@@ -37,10 +44,6 @@ public sealed interface Either<L, R> permits Either.Left, Either.Right {
 
     default <U> Either<L, U> flatMap(Function<? super R, Either<L, U>> mapper) {
         return fold(Either::left, mapper);
-    }
-
-    static <L, R> Either<L, R> narrow(Either<? extends L, ? extends R> either) {
-        return (Either<L, R>) either;
     }
 
     record Left<L, R>(L value) implements Either<L, R> {
