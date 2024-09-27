@@ -39,8 +39,8 @@ public class WebSecurityConfig {
             .formLogin(form -> form
                         .loginPage("/login")
                         .defaultSuccessUrl("/home")
-                        .failureUrl("/")
-                        .permitAll())
+                        .failureUrl("/login?error=true")
+                        )
             .logout(logout -> logout
                     .logoutSuccessUrl("/").permitAll());
         return http.build();
