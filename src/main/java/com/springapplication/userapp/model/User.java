@@ -1,12 +1,7 @@
 package com.springapplication.userapp.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.springapplication.userapp.config.WebSecurityConfig;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Entity
 @Table(name = "users_table")
@@ -25,7 +20,6 @@ public class User {
     private String email;
 
     @Column(nullable = false)
-    @JsonIgnore
     @NotNull
     private String password;
 

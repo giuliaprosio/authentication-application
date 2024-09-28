@@ -26,27 +26,27 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             return Either.left(new UserError.NoUsername());
         }
 
-        else if (userRepository.findByUsername(user.getUsername()) != null) {
+        if (userRepository.findByUsername(user.getUsername()) != null) {
             return Either.left(new UserError.DuplicatedUsername());
         }
 
-        else if(Strings.isBlank(user.getEmail())) {
+        if(Strings.isBlank(user.getEmail())) {
             return Either.left(new UserError.NoEmail());
         }
 
-        else if(userRepository.findByEmail(user.getEmail()) != null) {
+        if(userRepository.findByEmail(user.getEmail()) != null) {
             return Either.left(new UserError.EmailAlreadyInSystem());
         }
 
-        else if(Strings.isBlank(user.getPassword())) {
+        if(Strings.isBlank(user.getPassword())) {
             return Either.left(new UserError.NoPassword());
         }
 
-        else if(Strings.isBlank(user.getSecondPassword())) {
+        if(Strings.isBlank(user.getSecondPassword())) {
             return Either.left(new UserError.NoSecondPassword());
         }
 
-        else if(!user.getPassword().equals(user.getSecondPassword())) {
+        if(!user.getPassword().equals(user.getSecondPassword())) {
             return Either.left(new UserError.SecondPasswordNoMatch());
         }
 

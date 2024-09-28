@@ -19,35 +19,35 @@ public class RegisterController {
     }
 
     @GetMapping("/")
+    @ResponseBody
     public String index(Model model) {
         model.addAttribute("user", new User());
         return "login";
     }
 
     @GetMapping("/login")
+    @ResponseBody
     public String login(Model model) throws Exception {
-        model.addAttribute("user", new User());
         return "login";
     }
 
 
     @GetMapping("/register")
+    @ResponseBody
     public String register(Model model) throws  Exception {
-        model.addAttribute("user", new User());
         return "register";
     }
 
     @PostMapping("/register")
-    public String submission(@ModelAttribute User user, Model model) {
+    @ResponseBody
+    public String submission(@RequestBody User user) {
+
         Either<UserError, User> result = userDetailsService.registerUser(user);
 
         if(result.isLeft()) {
-            model.addAttribute("errorMessage", result.left().toString());
-            model.addAttribute("user", user);
-            return "register";
+            return result.left().toString();
         }
 
-        model.addAttribute("user", result.right());
         return "added";
     }
 
