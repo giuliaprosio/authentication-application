@@ -1,7 +1,10 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { useNavigate, Link} from "react-router-dom"; 
 import api from "../api/axiosConfig"; 
+import "bootstrap/dist/css/bootstrap.min.css"; 
+import axiosConfig from "../api/axiosConfig";
 
-const UserappCrud = ({ load }) => {
+const RegisterComponent = () => {
 
     //state definition 
     const [id, setId] = useState(""); 
@@ -9,17 +12,20 @@ const UserappCrud = ({ load }) => {
     const [email, setEmail] = useState(""); 
     const [password, setPassword] = useState(""); 
     const [secondPassword, setSecondPassword] = useState("");
+    const [message, setMessage] = useState(""); 
+    const navigate = useNavigate(); 
 
     //handlers 
     async function register(event) {
         event.preventDefault(); 
-        await api.post("/register", {
-            username: username, 
-            email: email, 
-            password: password, 
-            secondPassword: secondPassword,
-        }); 
-        alert("Registered");
+        console.log({username, email, password, secondPassword}); 
+        const response = await axiosConfig.register({username, email, password, secondPassword});
+        setMessage(response.data); 
+        if(response.data === "added") {
+            navigate("/login")
+        }
+        console.log(response.data)
+        
 
         //reset state
         setId("");
@@ -27,19 +33,8 @@ const UserappCrud = ({ load }) => {
         setEmail("");
         setPassword("");
         setSecondPassword("");
-        load();
+        
     }
-
-    /*async function login(event) {
-        event.preventDefault(); 
-        await api.post("/login", {
-            username: username, 
-            password: password,
-        }); 
-
-        setUsername(""); 
-        setPassword(""); 
-    }*/
 
     //jsx 
 
@@ -74,7 +69,7 @@ const UserappCrud = ({ load }) => {
                 <div className="form-group mb-2">
                     <label>Password</label>
                     <input
-                        type="text"
+                        type="password"
                         className="form-control"
                         value={password}
                         placeholder="Enter password"
@@ -82,9 +77,9 @@ const UserappCrud = ({ load }) => {
                     />
                 </div>
                 <div className="form-group mb-2">
-                    <label>SecondPassword</label>
+                    <label>Second Password</label>
                     <input
-                        type="text"
+                        type="password"
                         className="form-control"
                         value={secondPassword}
                         placeholder="Enter password again"
@@ -102,4 +97,4 @@ const UserappCrud = ({ load }) => {
     );
 }; 
 
-export default UserappCrud; 
+export default RegisterComponent; 
