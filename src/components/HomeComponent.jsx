@@ -2,10 +2,13 @@ import React from "react";
 
 const HomeComponent = () => {
     return (
-        <div className="container mt-5">
-            <h2>Home</h2>
-            <p>Welcome to the home!</p>
-        </div>
+        <div className="login-card">
+
+            <div className="card-header text-center">
+                <h2>Home</h2>
+                <h3>Welcome to the home page!</h3>
+            </div>
+        </div>    
     )
 }
 
