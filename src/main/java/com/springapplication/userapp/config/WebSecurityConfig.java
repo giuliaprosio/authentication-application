@@ -56,6 +56,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
                     .logoutSuccessUrl("/").permitAll());
         return http.build();
 
+        // TODO: JWT and tests
     }
-    
+
 }
