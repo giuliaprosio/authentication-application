@@ -11,11 +11,22 @@ const LoginComponent = () => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        const response = await axiosConfig.login({username, password});
-        if (response.data === "login") {
-            navigate("/home");
+
+        try {
+            const response = await axiosConfig.login({username, password});
+            console.log(response);
+            if (response.status === 200) {
+                navigate("/home");
+            }
         }
-        console.log(response.data);
+        catch (error) {
+            if(error.response && error.response.status === 401) {
+                setMessage("Invalid credentials. Try again. "); 
+            } else {
+                setMessage("An error occured during login. Try again later."); 
+            }
+        }
+        
     };
 
     return (
@@ -34,7 +45,9 @@ const LoginComponent = () => {
                             id="username"
                             placeholder="Enter username"
                             value={username}
-                            onChange={(e) => setUsername(e.target.value)}
+                            onChange={(e) => setUsername(e.target.value)
+                            }
+                            required
                         />
                     </div>
                     <div className="form-group mb-4">
@@ -46,6 +59,7 @@ const LoginComponent = () => {
                             placeholder="Enter password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
+                            required
                         />
                     </div>
                     <button type="submit" className="btn btn-primary w-100 btn-login">

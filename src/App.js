@@ -6,6 +6,7 @@ import './App.css';
 import RegisterComponent from "./components/RegisterComponent"; 
 import LoginComponent from "./components/LoginComponent"; 
 import HomeComponent from "./components/HomeComponent"; 
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() { 
   const [darkMode, setDarkMode] = useState(false);
@@ -29,7 +30,14 @@ function App() {
                   <Route path="/" element={<LoginComponent />} /> 
                   <Route path="/register" element={<RegisterComponent />} /> 
                   <Route path="/login" element={<LoginComponent />} /> 
-                  <Route path="/home" element={<HomeComponent />} /> 
+
+                  <Route 
+                    path="/home" 
+                    element={
+                      <ProtectedRoute>
+                          <HomeComponent />
+                      </ProtectedRoute>
+                    } /> 
                 </Routes> 
             
           </header> 
