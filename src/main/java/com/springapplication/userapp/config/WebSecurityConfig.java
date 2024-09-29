@@ -43,12 +43,14 @@ public class WebSecurityConfig implements WebMvcConfigurer {
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/css/**", "/static/**", "/assets/**").permitAll()
-                        .requestMatchers("/login/**", "/register").permitAll()
+                        .requestMatchers("/login", "/register").permitAll()
                         .anyRequest().authenticated())
             .formLogin(form -> form
-                        .loginPage("/login")
-                        .defaultSuccessUrl("/home", true)
-                        .failureUrl("/login?error=true")
+                            .loginPage("/login")
+                            .usernameParameter("username")
+                            .passwordParameter("password")
+                            .successHandler(new CustomAuthenticationSuccessHandler())
+                            .failureHandler(new CustomAuthenticationFailureHanlder())
                         )
             .logout(logout -> logout
                     .logoutSuccessUrl("/").permitAll());
