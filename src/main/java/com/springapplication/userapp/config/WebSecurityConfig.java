@@ -1,14 +1,31 @@
 package com.springapplication.userapp.config;
 
+import com.nimbusds.jose.jwk.JWK;
+import com.nimbusds.jose.jwk.JWKSet;
+import com.nimbusds.jose.jwk.RSAKey;
+import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
+import com.nimbusds.jose.jwk.source.JWKSource;
+import com.nimbusds.jose.proc.SecurityContext;
+import com.springapplication.userapp.service.TokenService;
 import com.springapplication.userapp.service.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.JwtEncoder;
+import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
+import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
+import org.springframework.security.oauth2.server.resource.web.BearerTokenAuthenticationEntryPoint;
+import org.springframework.security.oauth2.server.resource.web.access.BearerTokenAccessDeniedHandler;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -16,6 +33,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig implements WebMvcConfigurer {
+
+    private final RsaKeyProperties jwtConfigProperties;
+
+    public WebSecurityConfig(RsaKeyProperties jwtConfigProperties) {
+        this.jwtConfigProperties = jwtConfigProperties;
+    }
+
 
     @Bean
     PasswordEncoder passwordEncoder() {
@@ -37,19 +61,21 @@ public class WebSecurityConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public SecurityFilterChain configure(HttpSecurity http, DaoAuthenticationProvider authProvider) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, DaoAuthenticationProvider authProvider, CustomAuthenticationSuccessHandler successHandler) throws Exception {
 
         http.authenticationProvider(authProvider)
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/css/**", "/static/**", "/assets/**").permitAll()
-                        .requestMatchers("/login", "/register").permitAll()
+                        .requestMatchers("/login", "/register", "/token").permitAll()
                         .anyRequest().authenticated())
+            .sessionManagement(session-> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
             .formLogin(form -> form
                             .loginPage("/login")
                             .usernameParameter("username")
                             .passwordParameter("password")
-                            .successHandler(new CustomAuthenticationSuccessHandler())
+                            .successHandler(successHandler)
                             .failureHandler(new CustomAuthenticationFailureHanlder())
                         )
             .logout(logout -> logout
@@ -58,5 +84,18 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 
         // TODO: JWT and tests
     }
+
+    @Bean
+    JwtDecoder jwtDecoder() {
+        return NimbusJwtDecoder.withPublicKey(jwtConfigProperties.publicKey()).build();
+    }
+
+    @Bean
+    JwtEncoder jwtEncoder() {
+        JWK jwk = new RSAKey.Builder(jwtConfigProperties.publicKey()).privateKey(jwtConfigProperties.privateKey()).build();
+        JWKSource<SecurityContext> jwks = new ImmutableJWKSet<>(new JWKSet(jwk));
+        return new NimbusJwtEncoder(jwks);
+    }
+
 
 }
