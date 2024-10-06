@@ -13,9 +13,12 @@ const LoginComponent = () => {
         e.preventDefault();
 
         try {
-            const response = await axiosConfig.login({username, password});
-            console.log(response);
+            const response = await axiosConfig.login({username, password}) 
+            
             if (response.status === 200) {
+                const token = response.headers.getAuthorization().split(' ')[1];//.substring(6); 
+                console.log(token); 
+                localStorage.setItem('jwtToken', token); 
                 navigate("/home");
             }
         }

@@ -1,12 +1,13 @@
-import "bootstrap/dist/css/bootstrap.css"; 
+import "bootstrap/dist/css/bootstrap.min.css"; 
 import { useState } from "react"; 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"; 
 import logo from './logo.svg'; 
-import './App.css'; 
+import './App.css';
 import RegisterComponent from "./components/RegisterComponent"; 
 import LoginComponent from "./components/LoginComponent"; 
 import HomeComponent from "./components/HomeComponent"; 
 import ProtectedRoute from "./components/ProtectedRoute";
+
 
 function App() { 
   const [darkMode, setDarkMode] = useState(false);
@@ -17,7 +18,6 @@ function App() {
 
   return ( 
     <div className={darkMode ? 'dark-mode' : 'light-mode'}> 
-      <Router> 
         <div className="App"> 
           <header className="App-header"> 
             <img src={logo} className="App-logo" alt="logo" /> 
@@ -34,15 +34,16 @@ function App() {
                   <Route 
                     path="/home" 
                     element={
-                      <ProtectedRoute>
-                          <HomeComponent />
-                      </ProtectedRoute>
+                     <ProtectedRoute>
+                        <HomeComponent />
+                     </ProtectedRoute>
+                          
+                      
                     } /> 
                 </Routes> 
             
           </header> 
         </div> 
-      </Router> 
     </div> 
   ); 
 }
