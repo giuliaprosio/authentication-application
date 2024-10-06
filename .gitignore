@@ -33,3 +33,6 @@ build/
 .vscode/
 
 src/main/resources/application.properties
+
+/main/resources/certs/private.pem
+/main/resources/certs/public.pem
