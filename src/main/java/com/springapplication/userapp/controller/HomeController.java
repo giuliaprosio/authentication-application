@@ -3,6 +3,7 @@ package com.springapplication.userapp.controller;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Principal;
 
@@ -10,9 +11,10 @@ import java.security.Principal;
 public class HomeController {
 
     @GetMapping("/home")
-    public String home(Principal principal) {
+    @ResponseBody
+    public String home() {
 
-        return "welcome home, " + principal.getName();
+        return "welcome home";
     }
 
 
