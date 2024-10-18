@@ -18,23 +18,15 @@ public class RegisterController {
         this.userDetailsService = userDetailsService;
     }
 
-    @GetMapping("/")
-    @ResponseBody
-    public String index(Model model) {
-        model.addAttribute("user", new User());
-        return "login";
-    }
-
     @GetMapping("/login")
     @ResponseBody
-    public String login(Model model) throws Exception {
+    public String login() {
         return "login";
     }
-
 
     @GetMapping("/register")
     @ResponseBody
-    public String register(Model model) throws  Exception {
+    public String register() {
         return "register";
     }
 
@@ -47,7 +39,6 @@ public class RegisterController {
         if(result.isLeft()) {
             return result.left().toString();
         }
-
         return "added";
     }
 
