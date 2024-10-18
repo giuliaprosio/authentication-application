@@ -56,16 +56,6 @@ public class WebSecurityConfig implements WebMvcConfigurer {
         return authProvider;
     }
 
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("http://localhost:3000")
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                .allowedHeaders("*")
-                .exposedHeaders("Authorization")
-                .allowCredentials(true);
-    }
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, DaoAuthenticationProvider authProvider, CustomAuthenticationSuccessHandler successHandler) throws Exception {
 
@@ -74,6 +64,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
             .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/css/**", "/static/**", "/assets/**").permitAll()
                         .requestMatchers("/login", "/register", "/token").permitAll()
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs").permitAll() // swagger and openAPI
                         .anyRequest().authenticated())
             .sessionManagement(session-> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .oauth2ResourceServer(c -> c.jwt(Customizer.withDefaults()))
@@ -87,8 +78,6 @@ public class WebSecurityConfig implements WebMvcConfigurer {
             .logout(logout -> logout
                     .logoutSuccessUrl("/").permitAll());
         return http.build();
-
-        // TODO: JWT and tests
     }
 
     @Bean
@@ -101,6 +90,17 @@ public class WebSecurityConfig implements WebMvcConfigurer {
         JWK jwk = new RSAKey.Builder(jwtConfigProperties.publicKey()).privateKey(jwtConfigProperties.privateKey()).build();
         JWKSource<SecurityContext> jwks = new ImmutableJWKSet<>(new JWKSet(jwk));
         return new NimbusJwtEncoder(jwks);
+    }
+
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("http://localhost:3000")
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                .allowedHeaders("*")
+                .exposedHeaders("Authorization")
+                .allowCredentials(true);
     }
 
 

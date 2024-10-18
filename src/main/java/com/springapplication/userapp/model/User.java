@@ -70,3 +70,17 @@ public class User {
 
 }
 
+/* TODO:
+    - add tests for all the classes (good practice)
+    - use openAPI to generate the controllers (documentations, dtos and ease to use postman)
+    - test more the back-end/front-end interaction
+    - put the sensible information (passwords etc) in an .env file and make sure the file is not visible
+        but also everything works correctly
+    - research possible vulnerabilities in your code and how to handle them
+    - add some more errors to be handled
+    - rewrite the readme file
+    - do some UML/sequence diagrams
+    - better up the frontend (this is the least specific because it is the part I know less about)
+    - next: docker, makefile to run the app
+ */
+

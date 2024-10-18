@@ -29,7 +29,5 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         response.getWriter().write("Authentication successful");
         response.getWriter().flush();
 
-        //response.sendRedirect("/home");
-
     }
 }
