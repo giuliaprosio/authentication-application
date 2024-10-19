@@ -38,3 +38,5 @@ build/
 #src/main/resources/certs/public.pem
 
 src/main/resources/
+
+target

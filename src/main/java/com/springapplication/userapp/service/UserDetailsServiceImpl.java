@@ -24,32 +24,17 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private PasswordEncoder passwordEncoder;
 
     public Either<UserError, User> registerUser(User user) {
-        if (Strings.isBlank(user.getUsername())) {
-            return Either.left(new UserError.NoUsername());
-        }
 
         if (userRepository.findByUsername(user.getUsername()) != null) {
             return Either.left(new UserError.DuplicatedUsername());
-        }
-
-        if(Strings.isBlank(user.getEmail())) {
-            return Either.left(new UserError.NoEmail());
         }
 
         if(userRepository.findByEmail(user.getEmail()) != null) {
             return Either.left(new UserError.EmailAlreadyInSystem());
         }
 
-        if(Strings.isBlank(user.getPassword())) {
-            return Either.left(new UserError.NoPassword());
-        }
-
         if(Strings.isBlank(user.getSecondPassword())) {
             return Either.left(new UserError.NoSecondPassword());
-        }
-
-        if(!user.getPassword().equals(user.getSecondPassword())) {
-            return Either.left(new UserError.SecondPasswordNoMatch());
         }
 
         user.setUsername(user.getUsername());

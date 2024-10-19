@@ -92,11 +92,47 @@
 
 		<!-- Open API -->
 		<dependency>
+			<groupId>org.openapitools</groupId>
+			<artifactId>jackson-databind-nullable</artifactId>
+			<version>0.2.1</version>
+		</dependency>
+		<dependency>
 			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-			<version>2.0.3</version>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.7.0</version>
 		</dependency>
 
+		<dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>javax.annotation-api</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.1.0.Final</version>
+		</dependency>
+
+		<!-- Swagger Annotations -->
+		<dependency>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-annotations</artifactId>
+			<version>1.5.21</version> <!-- Adjust the version as needed -->
+		</dependency>
+
+		<!-- Springfox for Swagger Documentation -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.9.2</version> <!-- You can use 3.0.0 as well, if compatible -->
+		</dependency>
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.9.2</version>
+		</dependency>
 
 	</dependencies>
 
@@ -116,7 +152,37 @@
                     <compilerArgs>--enable-preview</compilerArgs>
                 </configuration>
             </plugin>
-        </plugins>
+
+			<!--OpenAPI generate -->
+			<plugin>
+				<groupId>org.openapitools</groupId>
+				<artifactId>openapi-generator-maven-plugin</artifactId>
+				<version>5.0.0</version>
+				<executions>
+					<execution>
+						<id>register-controller</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>${project.basedir}/src/main/resources/controller/register-controller.yaml</inputSpec>
+							<generatorName>spring</generatorName>
+							<apiPackage>com.springapplication.userapp.controller.api</apiPackage>
+							<modelPackage>com.springapplication.userapp.controller.model</modelPackage>
+							<invokerPackage>com.springapplication.userapp.invoker</invokerPackage> <!-- Add this -->
+							<output>${project.build.directory}/generated-sources/openapi</output> <!-- Add this -->
+							<supportingFilesToGenerate>ApiUtils.java</supportingFilesToGenerate>
+							<modelNameSuffix>DTO</modelNameSuffix>
+							<configOptions>
+								<delegatePattern>true</delegatePattern>
+								<useSpringBoot3>true</useSpringBoot3>
+							</configOptions>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
 	</build>
 
 </project>
