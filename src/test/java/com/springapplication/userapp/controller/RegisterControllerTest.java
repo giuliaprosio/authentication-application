@@ -5,6 +5,7 @@ import com.springapplication.userapp.config.CustomAuthenticationSuccessHandler;
 import com.springapplication.userapp.func.Either;
 import com.springapplication.userapp.model.User;
 import com.springapplication.userapp.service.UserDetailsServiceImpl;
+import com.springapplication.userapp.utils.RegisterRequestObjectMother;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;

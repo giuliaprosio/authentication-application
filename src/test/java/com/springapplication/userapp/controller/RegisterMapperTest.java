@@ -1,17 +1,15 @@
 package com.springapplication.userapp.controller;
 
 import com.springapplication.userapp.model.User;
-import org.aspectj.lang.annotation.Before;
+import com.springapplication.userapp.utils.RegisterRequestObjectMother;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import com.springapplication.userapp.controller.model.NewUserDTO;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Import;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.mockito.ArgumentMatchers.any;

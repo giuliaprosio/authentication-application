@@ -1,5 +1,6 @@
 package com.springapplication.userapp.controller;
 
+import com.springapplication.userapp.utils.RegisterRequestObjectMother;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

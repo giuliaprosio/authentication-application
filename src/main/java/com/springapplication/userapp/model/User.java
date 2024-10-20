@@ -71,16 +71,22 @@ public class User {
 }
 
 /* TODO:
-    - add tests for all the classes (good practice)
-    - use openAPI to generate the controllers (documentations, dtos and ease to use postman)
-    - test more the back-end/front-end interaction
+    - add test for other classes after controller (also research how to/what makes sense to test)
     - put the sensible information (passwords etc) in an .env file and make sure the file is not visible
         but also everything works correctly
     - research possible vulnerabilities in your code and how to handle them
-    - add some more errors to be handled
+    - add some more errors to be handled (all the network errors etc)
     - rewrite the readme file
-    - do some UML/sequence diagrams
+    - see what's wrong with maven
+    - use vavr to make it functional (remove custom Either class)
+    .
+    - after finishing with backend, FRONTEND:
+    - probably best way to start is to look up tutorial on frontend
+    - test more the back-end/front-end interaction
     - better up the frontend (this is the least specific because it is the part I know less about)
+    .
+    - infrastructure:
+    - kubernetes (jkube) and docker are the number 1 question
     - next: docker, makefile to run the app
  */
 

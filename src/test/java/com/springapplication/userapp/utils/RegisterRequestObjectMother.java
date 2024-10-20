@@ -1,11 +1,11 @@
-package com.springapplication.userapp.controller;
+package com.springapplication.userapp.utils;
 
 import com.springapplication.userapp.controller.model.NewUserDTO;
 import com.springapplication.userapp.model.User;
 
 public class RegisterRequestObjectMother {
 
-    static NewUserDTO makeValidUserDTO() {
+    public static NewUserDTO makeValidUserDTO() {
 
         var userDTO = new NewUserDTO();
         userDTO.setUsername("username");
@@ -17,7 +17,7 @@ public class RegisterRequestObjectMother {
 
     }
 
-    static NewUserDTO userDTOMissingName() {
+    public static NewUserDTO userDTOMissingName() {
 
         var userDTO = makeValidUserDTO();
         userDTO.setUsername(null);
@@ -25,7 +25,7 @@ public class RegisterRequestObjectMother {
         return userDTO;
     }
 
-    static NewUserDTO userDTOMissingEmail() {
+    public static NewUserDTO userDTOMissingEmail() {
 
         var userDTO = makeValidUserDTO();
         userDTO.setEmail(null);
@@ -33,7 +33,7 @@ public class RegisterRequestObjectMother {
         return userDTO;
     }
 
-    static NewUserDTO userDTOMissingPassword() {
+    public static NewUserDTO userDTOMissingPassword() {
 
         var userDTO = makeValidUserDTO();
         userDTO.setPassword(null);
@@ -41,7 +41,7 @@ public class RegisterRequestObjectMother {
         return userDTO;
     }
 
-    static NewUserDTO userDTOMissingSecondPassword() {
+    public static NewUserDTO userDTOMissingSecondPassword() {
 
         var userDTO = makeValidUserDTO();
         userDTO.setSecondPassword(null);
@@ -49,7 +49,7 @@ public class RegisterRequestObjectMother {
         return userDTO;
     }
 
-    static NewUserDTO userDTOPasswordsNotMatching() {
+    public static NewUserDTO userDTOPasswordsNotMatching() {
 
         var userDTO = makeValidUserDTO();
         userDTO.setSecondPassword("differentPassword");
@@ -57,7 +57,7 @@ public class RegisterRequestObjectMother {
         return userDTO;
     }
 
-    static User makeValidUserFromDTO(NewUserDTO userDTO) {
+    public static User makeValidUserFromDTO(NewUserDTO userDTO) {
 
         var user = new User();
         user.setUsername(userDTO.getUsername());
