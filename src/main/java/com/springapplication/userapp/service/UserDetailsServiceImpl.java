@@ -33,13 +33,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             return Either.left(new UserError.EmailAlreadyInSystem());
         }
 
-        if(Strings.isBlank(user.getSecondPassword())) {
-            return Either.left(new UserError.NoSecondPassword());
-        }
-
         user.setUsername(user.getUsername());
         user.setEmail(user.getEmail());
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(user.getPassword());
         userRepository.save(user);
 
         return Either.right(user);
