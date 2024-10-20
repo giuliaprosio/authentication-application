@@ -4,7 +4,6 @@ import com.springapplication.userapp.func.Either;
 import com.springapplication.userapp.model.User;
 import com.springapplication.userapp.model.UserError;
 import com.springapplication.userapp.repo.UserRepository;
-import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

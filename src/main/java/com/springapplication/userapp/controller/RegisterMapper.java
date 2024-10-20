@@ -1,8 +1,6 @@
 package com.springapplication.userapp.controller;
 
-import com.springapplication.userapp.func.Either;
 import com.springapplication.userapp.model.User;
-import com.springapplication.userapp.model.UserError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;

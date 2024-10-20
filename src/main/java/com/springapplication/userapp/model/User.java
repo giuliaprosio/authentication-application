@@ -23,21 +23,9 @@ public class User {
     @NotNull
     private String password;
 
-    @Transient
-    private String secondPassword;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getUsername() {
         return username;
     }
-
 
     public void setUsername(String username) {
         this.username = username;
@@ -55,17 +43,8 @@ public class User {
         this.password = password;
     }
 
-
     public String getPassword() {
         return password;
-    }
-
-    public String getSecondPassword() {
-        return secondPassword;
-    }
-
-    public void setSecondPassword(String secondPassword) {
-        this.secondPassword = secondPassword;
     }
 
 }
@@ -79,6 +58,9 @@ public class User {
     - rewrite the readme file
     - see what's wrong with maven
     - use vavr to make it functional (remove custom Either class)
+    - add loggers and clean code (some controllers might not need to be there)
+    - add admin role (add in db username admin and a password I store, generally
+    users have role user but if in login username is admin then I have more privileges)
     .
     - after finishing with backend, FRONTEND:
     - probably best way to start is to look up tutorial on frontend
