@@ -134,6 +134,20 @@
 			<version>2.9.2</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>5.10.2</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>5.11.0</version>
+			<scope>test</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -160,12 +174,12 @@
 				<version>5.0.0</version>
 				<executions>
 					<execution>
-						<id>register-controller</id>
+						<id>controllers</id>
 						<goals>
 							<goal>generate</goal>
 						</goals>
 						<configuration>
-							<inputSpec>${project.basedir}/src/main/resources/controller/register-controller.yaml</inputSpec>
+							<inputSpec>${project.basedir}/src/main/resources/controller/controllers.yaml</inputSpec>
 							<generatorName>spring</generatorName>
 							<apiPackage>com.springapplication.userapp.controller.api</apiPackage>
 							<modelPackage>com.springapplication.userapp.controller.model</modelPackage>
