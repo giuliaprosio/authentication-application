@@ -1,9 +1,6 @@
 package com.springapplication.userapp.controller;
 
-import com.springapplication.userapp.model.User;
-import com.springapplication.userapp.model.UserError;
 import com.springapplication.userapp.service.UserDetailsServiceImpl;
-import io.vavr.control.Either;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -11,7 +8,7 @@ import com.springapplication.userapp.controller.api.RegisterApiDelegate;
 import com.springapplication.userapp.controller.model.NewUserDTO;
 
 @Component
-public class RegisterController implements RegisterApiDelegate {
+class RegisterController implements RegisterApiDelegate {
 
     private final UserDetailsServiceImpl userDetailsService;
     private final RegisterValidator registerValidator;

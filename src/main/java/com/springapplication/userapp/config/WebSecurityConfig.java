@@ -27,7 +27,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig implements WebMvcConfigurer {
+class WebSecurityConfig implements WebMvcConfigurer {
 
     private final RsaKeyProperties jwtConfigProperties;
 

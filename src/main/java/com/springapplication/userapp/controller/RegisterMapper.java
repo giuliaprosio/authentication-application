@@ -16,7 +16,6 @@ class RegisterMapper {
 
     public Either<UserError, User>  mapper(NewUserDTO userDTO) {
 
-
         User user = new User();
         user.setUsername(userDTO.getUsername());
         user.setEmail(userDTO.getEmail());

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import com.springapplication.userapp.controller.api.LoginApiDelegate;
 
 @Component
-public class LoginController implements  LoginApiDelegate {
+class LoginController implements  LoginApiDelegate {
 
     @Override
     public ResponseEntity<String> login() {
