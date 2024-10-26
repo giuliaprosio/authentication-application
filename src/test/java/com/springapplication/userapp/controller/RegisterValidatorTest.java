@@ -22,10 +22,10 @@ public class RegisterValidatorTest {
         var result = registerValidator.validation(userDTO);
 
         //then
-        Assertions.assertEquals(userDTO.getUsername(), result.right().getUsername());
-        Assertions.assertEquals(userDTO.getEmail(), result.right().getEmail());
-        Assertions.assertEquals(userDTO.getPassword(), result.right().getPassword());
-        Assertions.assertEquals(userDTO.getSecondPassword(), result.right().getSecondPassword());
+        Assertions.assertEquals(userDTO.getUsername(), result.get().getUsername());
+        Assertions.assertEquals(userDTO.getEmail(), result.get().getEmail());
+        Assertions.assertEquals(userDTO.getPassword(), result.get().getPassword());
+        Assertions.assertEquals(userDTO.getSecondPassword(), result.get().getSecondPassword());
 
     }
 

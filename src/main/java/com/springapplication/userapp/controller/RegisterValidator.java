@@ -1,7 +1,7 @@
 package com.springapplication.userapp.controller;
 
-import com.springapplication.userapp.func.Either;
 import com.springapplication.userapp.model.UserError;
+import io.vavr.control.Either;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Component;
 import com.springapplication.userapp.controller.model.NewUserDTO;

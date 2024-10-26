@@ -1,9 +1,9 @@
 package com.springapplication.userapp.controller;
 
-import com.springapplication.userapp.func.Either;
 import com.springapplication.userapp.model.User;
 import com.springapplication.userapp.model.UserError;
 import com.springapplication.userapp.service.UserDetailsServiceImpl;
+import io.vavr.control.Either;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -32,12 +32,14 @@ public class RegisterController implements RegisterApiDelegate {
     public ResponseEntity<String> submission(NewUserDTO userDTO) {
 
         // TODO: make this functional
+
+
         Either<UserError, NewUserDTO> validationResult = registerValidator.validation(userDTO);
 
         if(validationResult.isLeft()) {
-            return new ResponseEntity<>(validationResult.left().toString(), HttpStatus.OK);
+            return new ResponseEntity<>(validationResult.getLeft().toString(), HttpStatus.OK);
         }
-        User mappedUser = registerMapper.mapper(validationResult.right());
+        User mappedUser = registerMapper.mapper(validationResult.get());
         Either<UserError, User> result = userDetailsService.registerUser(mappedUser);
 
         if(result.isLeft()) {

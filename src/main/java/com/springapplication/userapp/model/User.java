@@ -70,5 +70,8 @@ public class User {
     - infrastructure:
     - kubernetes (jkube) and docker are the number 1 question
     - next: docker, makefile to run the app
+    .
+    - VAVR:
+    - make also returning types of database with vavr (optional, seq)
  */
 
