@@ -31,21 +31,13 @@ public class RegisterController implements RegisterApiDelegate {
     @Override
     public ResponseEntity<String> submission(NewUserDTO userDTO) {
 
-        // TODO: make this functional
-
-
-        Either<UserError, NewUserDTO> validationResult = registerValidator.validation(userDTO);
-
-        if(validationResult.isLeft()) {
-            return new ResponseEntity<>(validationResult.getLeft().toString(), HttpStatus.OK);
-        }
-        User mappedUser = registerMapper.mapper(validationResult.get());
-        Either<UserError, User> result = userDetailsService.registerUser(mappedUser);
-
-        if(result.isLeft()) {
-            return new ResponseEntity<>(result.left().toString(), HttpStatus.OK);
-        }
-        return new ResponseEntity<>("added", HttpStatus.OK);
+        return registerValidator.validation(userDTO)
+                .flatMap(registerMapper::mapper)
+                .flatMap(userDetailsService::registerUser)
+                .fold(
+                        error -> new ResponseEntity<>(error.toString(), HttpStatus.OK),
+                        succ -> new ResponseEntity<>("added", HttpStatus.OK)
+                );
     }
 
 }

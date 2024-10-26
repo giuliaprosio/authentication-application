@@ -41,9 +41,9 @@ public class RegisterMapperTest {
                 .thenReturn("password");
         var result = registerMapper.mapper(userDTO);
 
-        Assertions.assertEquals(user.getUsername(), result.getUsername());
-        Assertions.assertEquals(user.getEmail(), result.getEmail());
-        Assertions.assertEquals(user.getPassword(), result.getPassword());
+        Assertions.assertEquals(user.getUsername(), result.get().getUsername());
+        Assertions.assertEquals(user.getEmail(), result.get().getEmail());
+        Assertions.assertEquals(user.getPassword(), result.get().getPassword());
 
     }
 

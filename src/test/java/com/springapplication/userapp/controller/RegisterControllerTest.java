@@ -71,7 +71,7 @@ public class RegisterControllerTest {
         when(registerValidator.validation(any(NewUserDTO.class)))
                 .thenReturn(Either.right(registerRequest));
         when(registerMapper.mapper(any(NewUserDTO.class)))
-                .thenReturn(userMapped);
+                .thenReturn(Either.right(userMapped));
         when(userDetailsService.registerUser(any(User.class)))
                 .thenReturn(Either.right(userMapped));
 

@@ -19,9 +19,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     public Either<UserError, User> registerUser(User user) {
 
         if (userRepository.findByUsername(user.getUsername()) != null) {
