@@ -8,7 +8,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Collections;
 
-// possibly this class will be useful when we add roles
 public class CustomUserDetails implements UserDetails {
 
     private User user;

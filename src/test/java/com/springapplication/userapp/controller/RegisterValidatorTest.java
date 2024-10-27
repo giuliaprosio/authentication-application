@@ -38,7 +38,7 @@ public class RegisterValidatorTest {
         var result = registerValidator.validation(userDTO);
 
         // then
-        Assertions.assertEquals("Username is required.", result.left().toString());
+        Assertions.assertEquals("Username is required.", result.getLeft().toString());
 
     }
 
@@ -51,7 +51,7 @@ public class RegisterValidatorTest {
         var result = registerValidator.validation(userDTO);
 
         // then
-        Assertions.assertEquals("Email required.", result.left().toString());
+        Assertions.assertEquals("Email required.", result.getLeft().toString());
 
     }
 
@@ -64,7 +64,7 @@ public class RegisterValidatorTest {
         var result = registerValidator.validation(userDTO);
 
         // then
-        Assertions.assertEquals("Password required.", result.left().toString());
+        Assertions.assertEquals("Password required.", result.getLeft().toString());
 
     }
 
@@ -77,7 +77,7 @@ public class RegisterValidatorTest {
         var result = registerValidator.validation(userDTO);
 
         // then
-        Assertions.assertEquals("Second password check is required.", result.left().toString());
+        Assertions.assertEquals("Second password check is required.", result.getLeft().toString());
 
     }
 
@@ -90,7 +90,7 @@ public class RegisterValidatorTest {
         var result = registerValidator.validation(userDTO);
 
         // then
-        Assertions.assertEquals("The passwords are not matching.", result.left().toString());
+        Assertions.assertEquals("The passwords are not matching.", result.getLeft().toString());
     }
 
 }
