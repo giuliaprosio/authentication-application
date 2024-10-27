@@ -2,6 +2,10 @@
  * Create a connection to the SpringBoot endpoints
  */
 
+/* this works partially. Now all get requests sent to backend but 
+the post requests (login and register) are not working.
+*/
+
 import axios from "axios";
 import qs from 'qs'; 
 
@@ -21,9 +25,23 @@ instance.interceptors.request.use((config) => {
         config.headers.Authorization = `Bearer ${token}`; 
     }
     return config; 
+}, (error) =>  Promise.reject(error)); 
+
+instance.interceptors.response.use((response) => {
+    // check if the response contains the auth token (from login)
+    if(response.headers.authorization) {
+        const token = response.headers.authorization.split(' ')[1]; 
+        localStorage.setItem("jwtToken", token); 
+    }
+
+    return response; 
 }, (error) => {
+    if(error.response && error.response.status === 401) {
+        localStorage.removeItem("jwtToken"); 
+        window.location.href = "/login"; 
+    }
     return Promise.reject(error); 
-}); 
+})
 
 class axiosConfig {
     register(user) {
@@ -36,13 +54,7 @@ class axiosConfig {
    login(credentials) {
         return instance.post(`${API_BASE_URL}/login`, qs.stringify(credentials)); 
     }
-
-    home() {
-        return instance.get(`${API_BASE_URL}/home`)
-    }
-
-
    
 }
 
-export default new axiosConfig(); 
+export default instance;
