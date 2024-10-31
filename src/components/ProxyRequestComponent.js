@@ -1,51 +1,47 @@
 // ProxyRequestComponent.js
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import axios from "../api/axiosConfig";
+import HomeComponent from "./HomeComponent";
+import LoginComponent from "./LoginComponent";
+import RegisterComponent from "./RegisterComponent";
+import axiosConfig from "../api/axiosConfig";
 
 const ProxyRequestComponent = () => {
-    const [responseData, setResponseData] = useState(null);
+    const [component, setComponent] = useState(null);
     const navigate = useNavigate();
     const location = useLocation();
+
+    const componentMap = {
+        home: <HomeComponent />,
+        login: <LoginComponent />,
+        register: <RegisterComponent />
+    };
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // Send GET request to the current location pathname
-                const response = await axios.get(location.pathname);
-                
-                if (response.data) {
-                    navigate(response.data);
+                const response = await axiosConfig.request(location.pathname);
+
+                if (typeof response.data === "string" && componentMap[response.data]) {
+                    setComponent(componentMap[response.data]);
                 } else {
-                    // Otherwise, set the response data to display it
-                    setResponseData(response.data);
+                    navigate("/login");
                 }
             } catch (error) {
-                // If unauthorized, redirect to login
-                if (error.response && error.response.status === 401) {
+                if (error.response && error.response.status === 404) {
                     navigate("/login");
                 } else {
-                    // Set error message if there's another type of error
-                    setResponseData({ error: error.message });
+                    setComponent(<div>An error occurred: {error.message}</div>);
                 }
             }
         };
 
-        // Fetch data every time the location changes
         fetchData();
     }, [location, navigate]);
 
     return (
         <div>
-            {responseData ? (
-                <div>
-                    {/* Display data if no redirection */}
-                    <h3>Response:</h3>
-                    <pre>{JSON.stringify(responseData, null, 2)}</pre>
-                </div>
-            ) : (
-                <p>Loading...</p>
-            )}
+            {component ? component : <p>Loading...</p>}
         </div>
     );
 };

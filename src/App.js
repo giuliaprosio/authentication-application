@@ -1,19 +1,29 @@
 // App.js
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import LoginComponent from "./components/LoginComponent";
-import RegisterComponent from "./components/RegisterComponent"
+import RegisterComponent from "./components/RegisterComponent";
+import HomeComponent from "./components/HomeComponent";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";  
 import ProxyRequestComponent from "./components/ProxyRequestComponent";
 
 function App() {
+    const [isDarkMode, setIsDarkMode] = useState(false);
+
+    const toggleDarkMode = () => setIsDarkMode(!isDarkMode);
+
     return (
-        <Router>
-            <Routes>
-                <Route path="/login" element={<LoginComponent />} />
-                <Route path='/register' element={<RegisterComponent />} />
-                <Route path="/*" element={<ProxyRequestComponent />} /> {/* Wildcard to forward all routes */}
-            </Routes>
-        </Router>
+        <div className={`App ${isDarkMode ? "dark-mode" : "light-mode"}`}>
+            <Router>
+                <button onClick={toggleDarkMode} className="btn-toggle-mode">
+                    Switch to {isDarkMode ? "Light" : "Dark"} Mode
+                </button>
+                <Routes>
+                    <Route path="/*" element={<ProxyRequestComponent />} />
+                </Routes>
+            </Router>
+        </div>
     );
 }
 

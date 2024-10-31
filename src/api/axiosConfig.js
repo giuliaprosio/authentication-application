@@ -1,60 +1,68 @@
-/**
- * Create a connection to the SpringBoot endpoints
- */
-
-/* this works partially. Now all get requests sent to backend but 
-the post requests (login and register) are not working.
-*/
-
+// axiosConfig.js
 import axios from "axios";
-import qs from 'qs'; 
+import qs from "qs";
 
-const API_BASE_URL = "http://localhost:8080"; 
+// Base URL for all API requests
+const API_BASE_URL = "http://localhost:8080";
 
+// Create an axios instance with interceptors
 const instance = axios.create({
-    baseURL: API_BASE_URL, 
-    headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-    }
-}); 
+    baseURL: API_BASE_URL,
+});
 
+// Request Interceptor for adding JWT token if present
 instance.interceptors.request.use((config) => {
-    const token = localStorage.getItem("jwtToken"); 
-    console.log("token: ", token); 
-    if(token) {
-        config.headers.Authorization = `Bearer ${token}`; 
+    const token = localStorage.getItem("jwtToken");
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
     }
-    return config; 
-}, (error) =>  Promise.reject(error)); 
+    return config;
+}, (error) => Promise.reject(error));
 
-instance.interceptors.response.use((response) => {
-    // check if the response contains the auth token (from login)
-    if(response.headers.authorization) {
-        const token = response.headers.authorization.split(' ')[1]; 
-        localStorage.setItem("jwtToken", token); 
+// Response Interceptor for handling unauthorized errors globally
+instance.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        if (error.response && error.response.status === 401) {
+            localStorage.removeItem("jwtToken");
+            window.location.href = "/login";
+        }
+        return Promise.reject(error);
     }
+);
 
-    return response; 
-}, (error) => {
-    if(error.response && error.response.status === 401) {
-        localStorage.removeItem("jwtToken"); 
-        window.location.href = "/login"; 
-    }
-    return Promise.reject(error); 
-})
+const axiosConfig = {
+    // Method for logging in a user
+    async login(credentials) {
+        const response = await instance.post(
+            "/login", 
+            qs.stringify(credentials), 
+            { headers: { "Content-Type": "application/x-www-form-urlencoded" } }
+        );
+        if (response.status === 200 && response.headers.authorization) {
+            const token = response.headers.authorization.split(" ")[1];
+            localStorage.setItem("jwtToken", token);
+        }
+        return response;
+    },
 
-class axiosConfig {
+    // Method for registering a new user with application/json content type
     register(user) {
-        const url = `${API_BASE_URL}/register`;
-        console.log(url);
-        return axios.post(`${API_BASE_URL}/register`, user); 
-    
-    }
+        return instance.post("/register", user, {
+            headers: { "Content-Type": "application/json" },
+        });
+    },
 
-   login(credentials) {
-        return instance.post(`${API_BASE_URL}/login`, qs.stringify(credentials)); 
-    }
-   
-}
+    // General-purpose request method for other endpoints
+    request(endpoint, method = "get", data = {}) {
+        const contentType = method === "post" ? "application/json" : "application/x-www-form-urlencoded";
+        return instance({
+            url: endpoint,
+            method,
+            data: contentType === "application/json" ? data : qs.stringify(data),
+            headers: { "Content-Type": contentType },
+        });
+    },
+};
 
-export default instance;
+export default axiosConfig;

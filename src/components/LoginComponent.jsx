@@ -13,23 +13,13 @@ const LoginComponent = () => {
         e.preventDefault();
 
         try {
-            const response = await axiosConfig.login({username, password}) 
-            
+            const response = await axiosConfig.login({ username, password });
             if (response.status === 200) {
-                const token = response.headers.getAuthorization().split(' ')[1];//.substring(6); 
-                console.log(token); 
-                localStorage.setItem('jwtToken', token); 
                 navigate("/home");
             }
+        } catch (error) {
+            setMessage(error.response?.status === 401 ? "Invalid credentials. Try again." : "An error occurred.");
         }
-        catch (error) {
-            if(error.response && error.response.status === 401) {
-                setMessage("Invalid credentials. Try again. "); 
-            } else {
-                setMessage("An error occured during login. Try again later."); 
-            }
-        }
-        
     };
 
     return (
@@ -48,8 +38,7 @@ const LoginComponent = () => {
                             id="username"
                             placeholder="Enter username"
                             value={username}
-                            onChange={(e) => setUsername(e.target.value)
-                            }
+                            onChange={(e) => setUsername(e.target.value)}
                             required
                         />
                     </div>
