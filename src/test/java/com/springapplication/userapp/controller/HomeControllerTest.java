@@ -38,7 +38,7 @@ public class HomeControllerTest {
         MvcResult result = this.mockMvc
                 .perform(get(ENDPOINT))
                 .andExpect(status().isOk())
-                .andExpect(content().string("welcome home"))
+                .andExpect(content().string("home"))
                 .andReturn();
     }
 
