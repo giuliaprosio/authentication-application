@@ -1,9 +1,5 @@
-// App.js
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import LoginComponent from "./components/LoginComponent";
-import RegisterComponent from "./components/RegisterComponent";
-import HomeComponent from "./components/HomeComponent";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";  
 import ProxyRequestComponent from "./components/ProxyRequestComponent";
