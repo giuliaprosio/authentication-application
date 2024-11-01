@@ -1,7 +1,6 @@
-package com.springapplication.userapp.utils;
+package com.springapplication.userapp.model;
 
 import com.springapplication.userapp.controller.model.NewUserDTO;
-import com.springapplication.userapp.model.User;
 
 public class RegisterRequestObjectMother {
 

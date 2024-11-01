@@ -67,7 +67,7 @@ class WebSecurityConfig implements WebMvcConfigurer {
                             .usernameParameter("username")
                             .passwordParameter("password")
                             .successHandler(successHandler)
-                            .failureHandler(new CustomAuthenticationFailureHanlder())
+                            .failureHandler(new CustomAuthenticationFailureHandler())
                         )
             .logout(logout -> logout
                     .logoutSuccessUrl("/").permitAll());

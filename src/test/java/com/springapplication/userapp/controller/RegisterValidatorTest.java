@@ -1,6 +1,6 @@
 package com.springapplication.userapp.controller;
 
-import com.springapplication.userapp.utils.RegisterRequestObjectMother;
+import com.springapplication.userapp.model.RegisterRequestObjectMother;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +38,7 @@ public class RegisterValidatorTest {
         var result = registerValidator.validation(userDTO);
 
         // then
-        Assertions.assertEquals("Username is required.", result.getLeft().toString());
+        Assertions.assertEquals("Username required.", result.getLeft().toString());
 
     }
 
@@ -77,7 +77,7 @@ public class RegisterValidatorTest {
         var result = registerValidator.validation(userDTO);
 
         // then
-        Assertions.assertEquals("Second password check is required.", result.getLeft().toString());
+        Assertions.assertEquals("Second password check required.", result.getLeft().toString());
 
     }
 

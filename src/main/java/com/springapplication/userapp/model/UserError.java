@@ -10,14 +10,14 @@ UserError.EmailAlreadyInSystem, UserError.NoPassword, UserError.NoSecondPassword
     record NoUsername() implements UserError {
         @Override
         public String toString() {
-            return "Username is required.";
+            return "Username required.";
         }
     }
 
     record  DuplicatedUsername() implements UserError {
         @Override
         public String toString() {
-            return "Username already taken";
+            return "Username already taken.";
         }
     }
 
@@ -38,7 +38,7 @@ UserError.EmailAlreadyInSystem, UserError.NoPassword, UserError.NoSecondPassword
 
     record NoSecondPassword() implements UserError {
         @Override
-        public String toString() { return "Second password check is required."; }
+        public String toString() { return "Second password check required."; }
     }
 
     record SecondPasswordNoMatch() implements  UserError {

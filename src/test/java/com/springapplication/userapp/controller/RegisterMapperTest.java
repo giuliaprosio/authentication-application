@@ -1,7 +1,7 @@
 package com.springapplication.userapp.controller;
 
 import com.springapplication.userapp.model.User;
-import com.springapplication.userapp.utils.RegisterRequestObjectMother;
+import com.springapplication.userapp.model.RegisterRequestObjectMother;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
