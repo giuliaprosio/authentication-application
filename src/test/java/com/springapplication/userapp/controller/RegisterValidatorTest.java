@@ -13,15 +13,12 @@ public class RegisterValidatorTest {
     RegisterValidator registerValidator;
 
     @Test
-    public void validUserDTO_returnsUserDTO() {
+    public void givenValidUserDTO_whenValidate_thenReturnsUserDTO() {
 
-        // given
         var userDTO = RegisterRequestObjectMother.makeValidUserDTO();
 
-        // when
         var result = registerValidator.validation(userDTO);
 
-        //then
         Assertions.assertEquals(userDTO.getUsername(), result.get().getUsername());
         Assertions.assertEquals(userDTO.getEmail(), result.get().getEmail());
         Assertions.assertEquals(userDTO.getPassword(), result.get().getPassword());
@@ -30,66 +27,55 @@ public class RegisterValidatorTest {
     }
 
     @Test
-    public void missingUsername_returnsError() {
-        // given
+    public void givenMissingUsername_whenValidate_thenReturnsError() {
+
         var userDTO = RegisterRequestObjectMother.userDTOMissingName();
 
-        // when
         var result = registerValidator.validation(userDTO);
 
-        // then
         Assertions.assertEquals("Username required.", result.getLeft().toString());
 
     }
 
     @Test
-    public void missingEmail_returnsError() {
-        // given
+    public void givenMissingEmail_whenValidate_thenReturnsError() {
+
         var userDTO = RegisterRequestObjectMother.userDTOMissingEmail();
 
-        // when
         var result = registerValidator.validation(userDTO);
 
-        // then
         Assertions.assertEquals("Email required.", result.getLeft().toString());
 
     }
 
     @Test
-    public void missingPassword_returnsError() {
-        // given
+    public void givenMissingPassword_whenValidate_thenReturnsError() {
+
         var userDTO = RegisterRequestObjectMother.userDTOMissingPassword();
 
-        // when
         var result = registerValidator.validation(userDTO);
 
-        // then
         Assertions.assertEquals("Password required.", result.getLeft().toString());
-
     }
 
     @Test
-    public void missingSecondPassword_returnsError() {
-        // given
+    public void givenMissingSecondPassword_whenValidate_thenReturnsError() {
+
         var userDTO = RegisterRequestObjectMother.userDTOMissingSecondPassword();
 
-        // when
         var result = registerValidator.validation(userDTO);
 
-        // then
         Assertions.assertEquals("Second password check required.", result.getLeft().toString());
 
     }
 
     @Test
-    public void passwordsNotMatching_returnsError() {
-        // given
+    public void givenPasswordsNotMatching_whenValidate_thenReturnsError() {
+
         var userDTO = RegisterRequestObjectMother.userDTOPasswordsNotMatching();
 
-        // when
         var result = registerValidator.validation(userDTO);
 
-        // then
         Assertions.assertEquals("The passwords are not matching.", result.getLeft().toString());
     }
 

@@ -18,29 +18,26 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     public Either<UserError, User> registerUser(User user) {
 
-        Either<Throwable, User> result =
-                Try.of(() -> userRepository.findByUsername(user.getUsername()))
-                                .toEither();
-
-        if(result.get() != null) return Either.left(new UserError.DuplicatedUsername());
-
-        Either<Throwable, User> result2 =
-                Try.of(() -> userRepository.findByEmail(user.getEmail()))
-                                .toEither();
-
-        if(result2.get() != null) return Either.left(new UserError.EmailAlreadyInSystem());
-
-        user.setUsername(user.getUsername());
-        user.setEmail(user.getEmail());
-        user.setPassword(user.getPassword());
-        userRepository.save(user);
-
-        return Either.right(user);
+        return getUserByUsername(user.getUsername())
+                .flatMap(u -> getUserByEmail(user.getEmail()))
+                .flatMap(u -> saveInRepo(user));
     }
 
     @Override
     public User loadUserByUsername(String username) throws UsernameNotFoundException {
-
         return userRepository.findByUsername(username);
+    }
+
+    private Either<UserError, String> getUserByUsername(String username) {
+        return userRepository.findByUsername(username) == null ? Either.right(username) : Either.left(new UserError.DuplicatedUsername());
+    }
+
+    private Either<UserError, String> getUserByEmail(String email) {
+        return userRepository.findByEmail(email) == null ? Either.right(email) : Either.left(new UserError.EmailAlreadyInSystem());
+    }
+
+    private Either<UserError, User> saveInRepo(User user) {
+        userRepository.save(user);
+        return Either.right(user);
     }
 }
