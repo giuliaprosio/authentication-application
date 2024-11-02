@@ -39,34 +39,34 @@
 }
 
 .dark-mode {
-  background-color: #282c34;
+  background-color: #191414; /* Spotify dark background */
   color: white;
 }
 
 .card {
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.1); /* Slight transparency */
+  border-radius: 12px;
 }
 
 .card:hover {
-  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.3);
 }
 
 .btn-toggle-mode {
   margin-bottom: 20px;
-  background-color: rgba(100, 100, 100, 0.7);
+  background-color: rgba(29, 185, 84, 0.7); /* Spotify green */
   border-radius: 20px;
   padding: 10px 20px;
   backdrop-filter: blur(10px);
   color: white;
-  border: 1px solid rgba(100, 100, 100, 0.4);
+  border: 1px solid rgba(29, 185, 84, 0.4);
   transition: background 0.3s ease;
 }
 
-
-
 .btn-toggle-mode:hover {
-  background: rgba(100, 100, 100, 0.5);
+  background: rgba(29, 185, 84, 0.5);
   border-color: rgba(255, 255, 255, 0.8);
 }
 
@@ -77,41 +77,56 @@
 }
 
 .login-card {
-  background-color: rgba(255, 255, 255, 0.8);  /* Slight transparency */
+  background-color: rgba(255, 255, 255, 0.1);  /* Slight transparency */
   border-radius: 12px;
   padding: 20px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease;
   width: 350px;
 }
 
 .login-card:hover {
-  transform: scale(1.02); /* Slight scale-up effect on hover */
+  transform: scale(1.02);
+}
+
+.home-card {
+  background-color: rgba(255, 255, 255, 0.1);  /* Slight transparency */
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+  width: 1050px;
+  height: 700px;
+}
+
+.home-card:hover {
+  transform: scale(1.02);
 }
 
 .card-header {
   margin-bottom: 20px;
   font-size: 24px;
   font-weight: bold;
+  color: #1db954; /* Spotify green */
 }
 
 div.card-header.text-center {
   text-align: center !important;
-  color: #0056b3;
+  color: #1db954;
 }
 
 .text-center {
   text-align: center !important;
-  color: #0056b3;
+  color: #1db954;
 }
 
 .form-group {
   text-align: left;
-  color: #0056b3;
+  color: #1db954;
 }
 
 .btn-login {
-  background-color: #007bff;
+  background-color: #1db954; /* Spotify green */
   border: none;
   padding: 12px 20px;
   font-size: 16px;
@@ -120,16 +135,16 @@ div.card-header.text-center {
 }
 
 .btn-login:hover {
-  background-color: #0056b3;
+  background-color: #14833b; /* Darker green for hover */
 }
 
 .link-primary {
-  color: #0056b3;
+  color: #1db954; /* Spotify green */
   text-decoration: underline;
 }
 
 .link-primary:hover {
-  color: #0056b3;
+  color: #14833b; /* Darker green for hover */
   text-decoration: underline;
 }
 

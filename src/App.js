@@ -5,15 +5,15 @@ import "./App.css";
 import ProxyRequestComponent from "./components/ProxyRequestComponent";
 
 function App() {
-    const [isDarkMode, setIsDarkMode] = useState(false);
+    const [isLightMode, setIsLightMode] = useState(false);
 
-    const toggleDarkMode = () => setIsDarkMode(!isDarkMode);
+    const toggleLightMode = () => setIsLightMode(!isLightMode);
 
     return (
-        <div className={`App ${isDarkMode ? "dark-mode" : "light-mode"}`}>
+        <div className={`App ${isLightMode ? "light-mode" : "dark-mode"}`}>
             <Router>
-                <button onClick={toggleDarkMode} className="btn-toggle-mode">
-                    Switch to {isDarkMode ? "Light" : "Dark"} Mode
+                <button onClick={toggleLightMode} className="btn-toggle-mode">
+                    Switch to {isLightMode ? "Dark" : "Light"} Mode
                 </button>
                 <Routes>
                     <Route path="/*" element={<ProxyRequestComponent />} />
