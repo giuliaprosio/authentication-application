@@ -30,7 +30,7 @@ const axiosConfig = {
 
     async login(credentials) {
         const response = await instance.post(
-            "/login", 
+            "/api/login", 
             qs.stringify(credentials), 
             { headers: { "Content-Type": "application/x-www-form-urlencoded" } }
         );
@@ -42,7 +42,7 @@ const axiosConfig = {
     },
 
     async register(user) {
-        return instance.post("/register", user, {
+        return instance.post("/api/register", user, {
             headers: { "Content-Type": "application/json" },
         });
     },
@@ -50,7 +50,7 @@ const axiosConfig = {
     async request(endpoint, method = "get", data = {}) {
         const contentType = method === "post" ? "application/json" : "application/x-www-form-urlencoded";
         return instance({
-            url: endpoint,
+            url: "/api" + endpoint,
             method,
             data: contentType === "application/json" ? data : qs.stringify(data),
             headers: { "Content-Type": contentType },

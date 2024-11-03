@@ -24,11 +24,11 @@ const ProxyRequestComponent = () => {
                 if (typeof response.data === "string" && componentMap[response.data]) {
                     setComponent(componentMap[response.data]);
                 } else {
-                    navigate("/login");
+                    navigate("/index.html");
                 }
             } catch (error) {
                 if (error.response && error.response.status === 404) {
-                    navigate("/login");
+                    navigate("/index.html");
                 } else {
                     setComponent(<div>An error occurred: {error.message}</div>);
                 }
