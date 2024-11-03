@@ -9,7 +9,7 @@ import com.springapplication.userapp.controller.api.LoginApiDelegate;
 class LoginController implements  LoginApiDelegate {
 
     @Override
-    public ResponseEntity<String> login() {
+    public ResponseEntity<String> getLoginPage() {
         return new ResponseEntity<>("login", HttpStatus.OK);
     }
 }

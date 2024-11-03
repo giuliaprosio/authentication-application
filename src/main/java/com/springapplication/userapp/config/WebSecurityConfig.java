@@ -56,14 +56,13 @@ class WebSecurityConfig implements WebMvcConfigurer {
         http.authenticationProvider(authProvider)
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/css/**", "/static/**", "/assets/**").permitAll()
-                        .requestMatchers("/login", "/register", "/token").permitAll()
-                        .requestMatchers("/swagger-ui/**", "/v3/api-docs").permitAll() // swagger and openAPI
+                        .requestMatchers("/css/**", "/static/**", "/assets/**", "/index.html", "/").permitAll()
+                        .requestMatchers("/api/login", "/api/register").permitAll()
                         .anyRequest().authenticated())
             .sessionManagement(session-> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .oauth2ResourceServer(c -> c.jwt(Customizer.withDefaults()))
             .formLogin(form -> form
-                            .loginPage("/login")
+                            .loginPage("/api/login")
                             .usernameParameter("username")
                             .passwordParameter("password")
                             .successHandler(successHandler)
@@ -90,7 +89,7 @@ class WebSecurityConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:3000")
+                .allowedOrigins("http://localhost:8080", "http://localhost:3000")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
                 .exposedHeaders("Authorization")

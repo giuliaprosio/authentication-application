@@ -21,7 +21,7 @@ class RegisterController implements RegisterApiDelegate {
     }
 
     @Override
-    public ResponseEntity<String> register() {
+    public ResponseEntity<String> getRegisterPage() {
         return new ResponseEntity<>("register", HttpStatus.OK);
     }
 
