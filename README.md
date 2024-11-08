@@ -1,4 +1,4 @@
-## Spring Boot Application 
+## Authentication Backend Application 
 An application to connect a web page with login or creation of a new account. 
 The data is set up to be connected to a local MySQL database. 
 
