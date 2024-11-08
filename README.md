@@ -63,8 +63,5 @@ run the command:
 mvn clean compile
 ```
 
-### Tests
-All the classes are unit tested in the `test` folder. To do the 
-integration tests I used Postman with the project running locally.
 
 
