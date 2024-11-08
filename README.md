@@ -1,4 +1,4 @@
-# Authentication frontend application
+# Authentication Frontend Application
 
 This project is a frontend for an authorization and authentication 
 application built with **React** and **Vite**. 
